@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  <!--  entrando com linha de path de arquivos javascritps  -->
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+     <script type="text/javascript" src="/javascripts/jquery-3.3.1.js" ></script>
+      <script type="text/javascript" src="/javascripts/validacao.js" ></script>
+     
+
+  </head>
+  <body>
+  <!--  <h1> Aplicação com <%= title %></h1>
+    <p>Bem vindo a minha primeira aplicação com Node.js e com...  <%= title %></p>-->
+         <!-- inicio de Codigo dhmtl de tela de cadastro -->
+     <h1>Cadastro com dados backend - Arq.Fisico</h1><br>
+        <a href="/">Home</a> 
+         <fieldset id="formCadastro">
+           <legend>Cadastro de pessoas:</legend>
+           <form action="/cadastrar-pessoas" method ="POST"  onsubmit="return validacao()">
+           	   <div>
+           	       <label for="nome">Nome.........: </label>
+                   <input type="text" name="nome" id="nome" />
+               </div>
+
+               <div>
+
+           	       <label for="sobrenome">Sobrenome: </label>
+                   <input type="text" name="sobrenome" id="sobrenome" />
+               </div>
+
+               <div>
+
+               	<label for="cpf">Cpf.............: </label>
+                   <input type="text" name="cpf" id="cpf" />
+               </div>
+
+                <div>
+
+           	      <label for="telefone">Telefone.....: </label>
+                   <input type="text" name="telefone" id="telefone" />
+               </div>
+
+               <div>
+
+           	      <label for="endereco">Endereço...: </label>
+                   <input type="text" name="endereco"  id="endereco" />
+               </div>
+
+                <div>
+           	      <hr>
+                   <input type="submit" value="Cadastrar" />
+               </div>
+
+
+           </form>
+       </fieldset>
+
+       <!-- inicio de html de pesquisa de dados -->
+       
+         <fieldset id="formCadastro">
+           <legend>Buscar:</legend>
+           <form action="/pesquisar" method ="GET">
+               <div>
+                   <label for="nome">Nome.........: </label>
+                   <input type="text" name="nome" id="nome" />
+               </div>
+
+               <div>
+                  <hr>
+                   <input type="submit" value="Buscar" />
+               </div>
+
+
+           </form>
+       </fieldset>
+
+       <!-- final de html de pesquisa de dados  -->
+              
+       <fieldset>
+       <legend>Pessoas Cadastradas</legend>
+       	<table border="1"  id="registros" >
+            <!-- criando tabela no template para rececer dados parametrizados -->
+       		<tr>
+       			<td>Nome</td>
+       			<td>Sobrenome</td>
+       			<td>CPF</td>
+       			<td>Telefone</td>
+       			<td>Endereço</td>
+            <td>Alterar</td>
+            <td>Excluir</td>
+     		</tr>
+
+            <!-- carregar dinamicamento dados de parametros da colocao HASH,
+       	   para ser espelhada no templete do fronte end 
+       	   no for apos a chamada da função de matriz hasc, usar o nome
+       	   de identificação do atributo que foi usado na criação da array\hash original
+       	   que esta na linha index.js -- 18 ate 24, criando assim um codigo dinamico
+       	   que pega o valor dos atributos passados por parametros no cadastro via array
+       	   e grava passando do servidor para a pagina, pegando os dados do arrey e coloca
+       	   no objeto tabela em uso. -->
+           
+           <%  for(i=0; i <pessoas.length; i ++) { %> 
+               <tr>
+       			       <td><%= pessoas[i].nome %></td>
+       			       <td><%= pessoas[i].sobrenome%></td>
+       			       <td><%= pessoas[i].cpf %></td>
+       			       <td><%= pessoas[i].telefone%></td>
+       			       <td><%= pessoas[i].endereco%></td>
+                   <td><a href="/alterar?cpf=<%= pessoas[i].cpf %>">alterar</a></td>
+                   <td><a href="#" onclick="excluirDados('<%= pessoas[i].cpf %>')" >excluir</a></td>            
+       		</tr>
+         	<% } %>
+      	</table>
+       </fieldset>
+     <!-- fim de Codigo dhmtl de tela de cadastro -->
+  </body>
+</html>
